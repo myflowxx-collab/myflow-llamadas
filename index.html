@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myflowxx | Reunión de Objetivos</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Reunión exclusiva myflowxx para fijar objetivos a 3 meses y conocernos.">
+    
+    <!-- Google Fonts: Plus Jakarta Sans (Brand clean) & Caveat (Handwritten note style) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <!-- Configuración exacta de colores y fuentes de myflowxx -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050507',
+                            dark: '#0b0b10',
+                            paper: '#0f0f16',
+                            darkGray: '#151522',
+                            red: '#ff1111',
+                            lightRed: '#ff4444',
+                            grid: 'rgba(255, 255, 255, 0.045)',
+                            ink: '#ffffff',
+                            inkMuted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        hand: ['"Caveat"', 'cursive']
+                    },
+                    animation: {
+                        'wiggle': 'wiggle 2.5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'bounce-slow': 'bounce 3s infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Estilos del cuaderno oscuro */
+        .notebook-grid {
+            background-color: #08080c;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.038) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.038) 1px, transparent 1px);
+            background-size: 26px 26px;
+        }
+
+        .sketch-box {
+            background-color: #0e0e15;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 20px 20px;
+            border: 2px solid #2a2a3e;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sketch-box:hover {
+            border-color: #ff1111;
+            box-shadow: 0 0 20px rgba(255, 17, 17, 0.15);
+        }
+
+        /* Animaciones personalizadas */
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1.5deg); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.25; filter: blur(30px); }
+            50% { opacity: 0.45; filter: blur(45px); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 9px; }
+        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-thumb { background: #232333; border-radius: 6px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff1111; }
+    </style>
+</head>
+<body class="bg-brand-black text-white font-sans overflow-x-hidden selection:bg-brand-red selection:text-white notebook-grid min-h-screen flex flex-col">
+
+    <!-- Espirales del cuaderno a la izquierda -->
+    <div class="fixed left-0 top-0 bottom-0 w-8 md:w-12 z-40 pointer-events-none flex flex-col justify-around py-4 border-r border-white/5 bg-gradient-to-r from-black/80 to-transparent">
+        <template id="spiral-template">
+            <div class="flex items-center space-x-1 pl-1 md:pl-2">
+                <div class="w-4 md:w-7 h-2.5 md:h-3 rounded-full bg-gradient-to-r from-gray-700 via-gray-300 to-gray-800 shadow-md transform -rotate-12 border border-black/40"></div>
+                <div class="w-2 h-2 rounded-full bg-black/90 shadow-inner"></div>
+            </div>
+        </template>
+        <div id="spiral-container" class="h-full flex flex-col justify-between py-2"></div>
+    </div>
+
+    <!-- Luces rojas de fondo -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-[10%] right-[5%] w-[400px] h-[400px] bg-brand-red opacity-[0.035] rounded-full filter blur-[100px] animate-pulse-glow"></div>
+        <div class="absolute bottom-[20%] left-[10%] w-[500px] h-[500px] bg-brand-red opacity-[0.03] rounded-full filter blur-[130px]"></div>
+    </div>
+
+    <!-- Cabecera con el LOGO EXACTO -->
+    <header class="w-full z-50 bg-transparent relative">
+        <div class="max-w-4xl mx-auto px-6 h-24 py-4 flex items-center justify-center pl-12 md:pl-16">
+            <!-- Logo Vectorial myflowxx -->
+            <div class="h-16 sm:h-20 w-auto flex items-center">
+                <svg viewBox="0 0 540 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto select-none drop-shadow-[0_0_15px_rgba(255,17,17,0.15)]">
+                    <!-- Corona roja -->
+                    <g stroke="#ff1111" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="56" cy="33" r="3.2" fill="#ff1111" stroke="none" />
+                        <circle cx="118" cy="18" r="3.6" fill="#ff1111" stroke="none" />
+                        <circle cx="180" cy="33" r="3.2" fill="#ff1111" stroke="none" />
+                        <path d="M 72 82 L 56 46 L 110 82" />
+                        <path d="M 126 82 L 180 46 L 164 82" />
+                        <path d="M 56 46 L 118 84 L 180 46" />
+                        <path d="M 72 82 L 118 29 L 164 82" />
+                        <path d="M 72 82 L 164 82" />
+                    </g>
+                    <!-- "my flow" en blanco -->
+                    <g fill="none" stroke="#ffffff" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 62 120 C 62 108 72 101 81 101 C 89 101 93 108 94 118 C 96 108 103 101 112 101 C 122 101 127 109 127 122 L 126 126" />
+                        <path d="M 130 112 C 132 118 135 125 142 125 C 148 125 152 118 153 108 L 153 125 C 153 148 147 175 130 196 C 123 205 116 208 112 201 C 109 194 116 179 135 160 C 150 145 164 128 178 114" />
+                        <path d="M 278 40 C 275 35 268 40 263 56 C 255 83 246 128 238 168 C 233 192 227 208 221 206 C 217 205 220 188 230 162" />
+                        <path d="M 235 124 C 248 123 263 121 275 119" />
+                        <path d="M 270 125 C 278 112 289 74 296 74 C 301 74 298 92 293 113 C 290 125 292 130 299 128" />
+                        <path d="M 314 114 C 307 114 302 120 302 126 C 302 133 308 137 317 137 C 327 137 332 128 332 121 C 332 114 324 111 316 114 C 326 113 336 113 343 117" />
+                        <path d="M 346 119 C 347 127 350 135 357 135 C 363 135 367 127 369 119 C 371 127 375 135 382 135 C 390 135 397 124 402 113 C 405 106 409 104 414 107" />
+                    </g>
+                    <!-- 'xx' rojo -->
+                    <g stroke="#ff1111" stroke-width="3.2" stroke-linecap="round">
+                        <line x1="363" y1="87" x2="376" y2="100" />
+                        <line x1="376" y1="87" x2="363" y2="100" />
+                        <line x1="384" y1="87" x2="397" y2="100" />
+                        <line x1="397" y1="87" x2="384" y2="100" />
+                        <path d="M 364 104 Q 380 110 398 104" fill="none" />
+                    </g>
+                    <!-- Pingüino rojo -->
+                    <g stroke="#ff1111" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                        <path d="M 423 72 L 401 75 L 420 83" />
+                        <path d="M 423 72 C 427 67 435 66 443 69 C 452 72 458 83 458 98 C 458 124 466 160 484 186 L 487 189 C 484 190 472 192 463 189 C 460 188 459 184 457 181 L 452 189 L 428 189 C 425 186 429 180 435 178" />
+                        <path d="M 420 83 C 426 91 428 99 426 109 C 420 134 417 159 423 183 L 428 189" />
+                        <path d="M 436 98 C 445 110 449 135 440 168 C 438 174 436 180 439 183" />
+                        <path d="M 430 116 C 432 135 431 155 427 172" />
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-8 pl-12 md:pl-20">
+        
+        <div class="max-w-2xl w-full text-center mb-10">
+            <h1 class="font-hand text-4xl sm:text-5xl font-bold text-brand-red mb-3 animate-wiggle inline-block">
+                Reunión de Familia 🚀
+            </h1>
+            
+            <!-- Etiqueta de Fecha y Hora -->
+            <div class="mb-6 flex justify-center">
+                <div class="inline-flex items-center space-x-3 px-6 py-2.5 rounded-full bg-brand-red/10 border border-brand-red/30 shadow-[0_0_15px_rgba(255,17,17,0.15)]">
+                    <i class="fa-regular fa-calendar text-brand-lightRed text-lg animate-pulse"></i>
+                    <span class="text-brand-lightRed font-extrabold tracking-wide text-sm sm:text-base">
+                        Sábado 26 a las 11:00 de la mañana
+                    </span>
+                </div>
+            </div>
+
+            <p class="text-gray-300 text-lg sm:text-xl max-w-xl mx-auto leading-relaxed">
+                Antes del evento presencial, vamos a conocernos, fijar <strong class="text-white">objetivos a 3 meses</strong> y comprometernos en equipo.
+            </p>
+        </div>
+
+        <!-- Tarjetas de Información (El plan) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl w-full mb-10">
+            <div class="sketch-box p-5 border-brand-red/20 text-left flex items-start space-x-4 hover:border-brand-red/60">
+                <div class="h-10 w-10 rounded-full bg-brand-red/10 text-brand-lightRed flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-crosshairs"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white mb-1">Fijar Objetivos</h3>
+                    <p class="text-sm text-gray-400">Estableceremos metas claras a 3 meses vista para darle caña a nuestros proyectos.</p>
+                </div>
+            </div>
+            
+            <div class="sketch-box p-5 border-brand-red/20 text-left flex items-start space-x-4 hover:border-brand-red/60">
+                <div class="h-10 w-10 rounded-full bg-brand-red/10 text-brand-lightRed flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-users-rays"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white mb-1">Nuevo Grupo Privado</h3>
+                    <p class="text-sm text-gray-400">Crearemos un grupo aparte solo para los comprometidos con este reto.</p>
+                </div>
+            </div>
+
+            <div class="sketch-box p-5 border-brand-red/20 text-left flex items-start space-x-4 hover:border-brand-red/60 md:col-span-2">
+                <div class="h-10 w-10 rounded-full bg-yellow-500/10 text-yellow-500 flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white mb-1">El Premio Familia</h3>
+                    <p class="text-sm text-gray-400">Quien logre reventar sus objetivos de aquí a 3 meses se llevará un premio exclusivo. Sin excusas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div class="sketch-box p-6 sm:p-8 max-w-md w-full border-brand-red/40 relative">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">Apúntate a la llamada</h2>
+            
+            <form id="formulario-asistencia" class="space-y-5">
+                <!-- Nombre -->
+                <div>
+                    <label for="nombre" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Nombre y apellido *</label>
+                    <input type="text" id="nombre" required 
+                        class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-brand-red transition-colors shadow-inner" 
+                        placeholder="Ej: Marcos Gómez">
+                </div>
+                
+                <!-- Email con Aviso Importante -->
+                <div class="pt-2">
+                    <!-- Caja de aviso llamativa -->
+                    <div class="mb-3 p-3 rounded-xl bg-brand-red/10 border border-brand-red/30 flex items-start space-x-3">
+                        <i class="fa-solid fa-triangle-exclamation text-brand-lightRed mt-0.5 animate-bounce-slow"></i>
+                        <p class="text-xs text-brand-lightRed font-bold leading-relaxed">
+                            ¡Ojo! Asegúrate de poner bien el correo. Es ahí donde te enviaremos el link de acceso a la videollamada.
+                        </p>
+                    </div>
+
+                    <label for="correo" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Tu correo electrónico *</label>
+                    <input type="email" id="correo" required 
+                        class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-brand-red transition-colors shadow-inner" 
+                        placeholder="tucorreo@gmail.com">
+                </div>
+                
+                <!-- Botón Submit -->
+                <button type="submit" id="btn-enviar" 
+                    class="w-full mt-4 px-8 py-4 rounded-xl bg-brand-red hover:bg-brand-lightRed text-white font-black text-base shadow-lg shadow-brand-red/25 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center space-x-2">
+                    <span>Confirmar Asistencia</span>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </button>
+            </form>
+
+            <!-- Mensaje de Éxito Oculto -->
+            <div id="mensaje-exito" class="hidden py-8 flex flex-col items-center justify-center text-center space-y-4">
+                <div class="h-16 w-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 text-3xl flex items-center justify-center animate-wiggle">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 class="text-2xl font-black text-white">¡Dentro!</h4>
+                <p class="text-sm text-gray-300 leading-relaxed font-hand text-xl">
+                    Nos vemos en la llamada. Revisa tu bandeja de entrada (y el spam por si acaso) los próximos días.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // 1. Configuración de Firebase (Tus llaves exactas)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAw-LLKghBicJBC02MRwAyUS0hH-sD9ep4",
+            authDomain: "myflowxx-92a77.firebaseapp.com",
+            databaseURL: "https://myflowxx-92a77-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "myflowxx-92a77",
+            storageBucket: "myflowxx-92a77.firebasestorage.app",
+            messagingSenderId: "950448996162",
+            appId: "1:950448996162:web:44b7b915d6ca09ded792db"
+        };
+        
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // 2. Lógica del Formulario
+        document.getElementById('formulario-asistencia').addEventListener('submit', function(evento) {
+            evento.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value; // Capturamos el correo
+            const boton = document.getElementById('btn-enviar');
+            
+            // Estado visual de carga en el botón
+            boton.innerHTML = '<span>Guardando...</span><i class="fa-solid fa-spinner animate-spin"></i>';
+            boton.disabled = true;
+            boton.classList.add('opacity-75', 'cursor-not-allowed', 'hover:scale-100');
+
+            // 3. Guardar en Realtime Database
+            database.ref('reunion_objetivos').push({
+                nombre: nombre,
+                correo: correo, // Se envía a la base de datos
+                fecha_registro: new Date().toLocaleString()
+            }).then(() => {
+                // Éxito: Ocultar formulario, mostrar check
+                document.getElementById('formulario-asistencia').classList.add('hidden');
+                document.getElementById('mensaje-exito').classList.remove('hidden');
+            }).catch((error) => {
+                // Error de conexión
+                alert("Uy, falló la conexión. Inténtalo de nuevo.");
+                boton.innerHTML = '<span>Confirmar Asistencia</span><i class="fa-solid fa-arrow-right text-sm"></i>';
+                boton.disabled = false;
+                boton.classList.remove('opacity-75', 'cursor-not-allowed', 'hover:scale-100');
+            });
+        });
+
+        // 4. Script para generar las espirales del cuaderno de la izquierda dinámicamente
+        const spiralContainer = document.getElementById('spiral-container');
+        const spiralTemplate = document.getElementById('spiral-template');
+        
+        function populateSpirals() {
+            spiralContainer.innerHTML = '';
+            // Calcula cuántas anillas caben según el alto de la pantalla
+            const ringCount = Math.floor(window.innerHeight / 50);
+            for (let i = 0; i < ringCount; i++) {
+                const clone = spiralTemplate.content.cloneNode(true);
+                spiralContainer.appendChild(clone);
+            }
+        }
+        
+        // Ejecutar al cargar y al redimensionar la ventana
+        window.addEventListener('load', populateSpirals);
+        window.addEventListener('resize', populateSpirals);
+    </script>
+</body>
+</html>
