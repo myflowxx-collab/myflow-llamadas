@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myflowxx | Reunión de Objetivos</title>
+    <title>myflowxx | Last Call - Reunión de Familia</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Reunión exclusiva myflowxx para fijar objetivos a 3 meses y conocernos.">
+    <meta name="description" content="Last Call exclusiva myflowxx antes del evento presencial. Presentaciones, feedback para tus proyectos y resolución de dudas.">
     
-    <!-- Google Fonts: Plus Jakarta Sans (Brand clean) & Caveat (Handwritten note style) -->
+    <!-- Google Fonts: Plus Jakarta Sans & Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -23,7 +23,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     
-    <!-- Configuración exacta de colores y fuentes de myflowxx -->
     <script>
         tailwind.config = {
             theme: {
@@ -48,7 +47,14 @@
                     animation: {
                         'wiggle': 'wiggle 2.5s ease-in-out infinite',
                         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
-                        'bounce-slow': 'bounce 3s infinite'
+                        'bounce-slow': 'bounce 3s infinite',
+                        'badge-pulse': 'badgePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        badgePulse: {
+                            '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+                            '50%': { transform: 'scale(1.05)', opacity: '0.85' }
+                        }
                     }
                 }
             }
@@ -77,17 +83,16 @@
         }
         .sketch-box:hover {
             border-color: #ff1111;
-            box-shadow: 0 0 20px rgba(255, 17, 17, 0.15);
+            box-shadow: 0 0 24px rgba(255, 17, 17, 0.18);
         }
 
-        /* Animaciones personalizadas */
         @keyframes wiggle {
             0%, 100% { transform: rotate(-1deg); }
             50% { transform: rotate(1.5deg); }
         }
         @keyframes pulseGlow {
-            0%, 100% { opacity: 0.25; filter: blur(30px); }
-            50% { opacity: 0.45; filter: blur(45px); }
+            0%, 100% { opacity: 0.25; filter: blur(35px); }
+            50% { opacity: 0.5; filter: blur(55px); }
         }
 
         /* Scrollbar */
@@ -112,16 +117,15 @@
 
     <!-- Luces rojas de fondo -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div class="absolute top-[10%] right-[5%] w-[400px] h-[400px] bg-brand-red opacity-[0.035] rounded-full filter blur-[100px] animate-pulse-glow"></div>
-        <div class="absolute bottom-[20%] left-[10%] w-[500px] h-[500px] bg-brand-red opacity-[0.03] rounded-full filter blur-[130px]"></div>
+        <div class="absolute top-[8%] right-[5%] w-[420px] h-[420px] bg-brand-red opacity-[0.045] rounded-full filter blur-[110px] animate-pulse-glow"></div>
+        <div class="absolute bottom-[15%] left-[8%] w-[520px] h-[520px] bg-brand-red opacity-[0.035] rounded-full filter blur-[140px]"></div>
     </div>
 
-    <!-- Cabecera con el LOGO EXACTO -->
     <header class="w-full z-50 bg-transparent relative">
         <div class="max-w-4xl mx-auto px-6 h-24 py-4 flex items-center justify-center pl-12 md:pl-16">
             <!-- Logo Vectorial myflowxx -->
             <div class="h-16 sm:h-20 w-auto flex items-center">
-                <svg viewBox="0 0 540 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto select-none drop-shadow-[0_0_15px_rgba(255,17,17,0.15)]">
+                <svg viewBox="0 0 540 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto select-none drop-shadow-[0_0_15px_rgba(255,17,17,0.2)]">
                     <!-- Corona roja -->
                     <g stroke="#ff1111" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="56" cy="33" r="3.2" fill="#ff1111" stroke="none" />
@@ -164,65 +168,101 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
     <main class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-8 pl-12 md:pl-20">
         
-        <div class="max-w-2xl w-full text-center mb-10">
-            <h1 class="font-hand text-4xl sm:text-5xl font-bold text-brand-red mb-3 animate-wiggle inline-block">
+        <div class="max-w-3xl w-full text-center mb-10">
+            <!-- LAST CALL BADGE -->
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-red/20 border border-brand-red text-brand-lightRed text-xs sm:text-sm font-black tracking-widest uppercase mb-4 shadow-[0_0_20px_rgba(255,17,17,0.35)] animate-badge-pulse">
+                <i class="fa-solid fa-fire text-brand-red"></i>
+                <span>LAST CALL • PRE-EVENTO PRESENCIAL</span>
+            </div>
+
+            <h1 class="block font-hand text-4xl sm:text-6xl font-bold text-brand-red mb-3 animate-wiggle">
                 Reunión de Familia 🚀
             </h1>
             
-            <!-- Etiqueta de Fecha y Hora -->
+            <!-- Etiqueta de Fecha y Hora actualizada -->
             <div class="mb-6 flex justify-center">
-                <div class="inline-flex items-center space-x-3 px-6 py-2.5 rounded-full bg-brand-red/10 border border-brand-red/30 shadow-[0_0_15px_rgba(255,17,17,0.15)]">
-                    <i class="fa-regular fa-calendar text-brand-lightRed text-lg animate-pulse"></i>
-                    <span class="text-brand-lightRed font-extrabold tracking-wide text-sm sm:text-base">
-                        Sábado 26 a las 17:00 
+                <div class="inline-flex items-center space-x-3 px-6 py-3 rounded-full bg-brand-red/10 border border-brand-red/40 shadow-[0_0_20px_rgba(255,17,17,0.2)]">
+                    <i class="fa-regular fa-calendar-check text-brand-lightRed text-lg animate-pulse"></i>
+                    <span class="text-brand-lightRed font-black tracking-wide text-sm sm:text-lg">
+                        Domingo 3 de Septiembre • 17:00 a 18:00 (Hora Peninsular)
                     </span>
                 </div>
             </div>
 
-            <p class="text-gray-300 text-lg sm:text-xl max-w-xl mx-auto leading-relaxed">
-                Antes del evento presencial, vamos a conocernos, fijar <strong class="text-white">objetivos a 3 meses</strong> y comprometernos en equipo.
+            <p class="text-gray-300 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed">
+                Nuestra última parada online antes de vernos cara a cara. Una sesión intensiva para <strong class="text-white">romper el hielo</strong>, poner en común tus proyectos, recibir <strong class="text-white">feedback brutal</strong> y resolver todas las dudas del evento.
             </p>
         </div>
 
-        <!-- Tarjetas de Información (El plan) -->
+        <!-- Tarjetas del Plan / Agenda -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl w-full mb-10">
-            <div class="sketch-box p-5 border-brand-red/20 text-left flex items-start space-x-4 hover:border-brand-red/60">
-                <div class="h-10 w-10 rounded-full bg-brand-red/10 text-brand-lightRed flex items-center justify-center text-xl shrink-0">
-                    <i class="fa-solid fa-crosshairs"></i>
+            
+            <!-- Card 1: Romper el hielo -->
+            <div class="sketch-box p-5 border-brand-red/25 text-left flex items-start space-x-4 hover:border-brand-red">
+                <div class="h-11 w-11 rounded-2xl bg-brand-red/15 text-brand-lightRed flex items-center justify-center text-xl shrink-0 border border-brand-red/30">
+                    <i class="fa-solid fa-handshake"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white mb-1">Fijar Objetivos</h3>
-                    <p class="text-sm text-gray-400">Estableceremos metas claras a 3 meses vista para darle caña a nuestros proyectos.</p>
+                    <h3 class="font-bold text-white mb-1">Presentaciones & Romper el Hielo</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Conócete con el resto del grupo antes del evento para no llegar como un extraño. Creamos piña desde el minuto uno.
+                    </p>
                 </div>
             </div>
             
-            <div class="sketch-box p-5 border-brand-red/20 text-left flex items-start space-x-4 hover:border-brand-red/60">
-                <div class="h-10 w-10 rounded-full bg-brand-red/10 text-brand-lightRed flex items-center justify-center text-xl shrink-0">
-                    <i class="fa-solid fa-users-rays"></i>
+            <!-- Card 2: Proyectos propios y Feedback -->
+            <div class="sketch-box p-5 border-brand-red/25 text-left flex items-start space-x-4 hover:border-brand-red">
+                <div class="h-11 w-11 rounded-2xl bg-brand-red/15 text-brand-lightRed flex items-center justify-center text-xl shrink-0 border border-brand-red/30">
+                    <i class="fa-solid fa-comments"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white mb-1">Nuevo Grupo Privado</h3>
-                    <p class="text-sm text-gray-400">Crearemos un grupo aparte solo para los comprometidos con este reto.</p>
+                    <h3 class="font-bold text-white mb-1">Feedback de Proyectos</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Trae lo que estés construyendo. Recibirás perspectiva externa, puntos ciegos e ideas reales para acelerar de inmediato.
+                    </p>
                 </div>
             </div>
 
-            <div class="sketch-box p-5 border-brand-red/20 text-left flex items-start space-x-4 hover:border-brand-red/60 md:col-span-2">
-                <div class="h-10 w-10 rounded-full bg-yellow-500/10 text-yellow-500 flex items-center justify-center text-xl shrink-0">
+            <!-- Card 3: Dudas e Inquietudes -->
+            <div class="sketch-box p-5 border-brand-red/25 text-left flex items-start space-x-4 hover:border-brand-red">
+                <div class="h-11 w-11 rounded-2xl bg-brand-red/15 text-brand-lightRed flex items-center justify-center text-xl shrink-0 border border-brand-red/30">
+                    <i class="fa-solid fa-circle-question"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white mb-1">Dudas & Preparación del Evento</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Resolvemos cualquier duda sobre la logística, el programa y las expectativas del evento para que vayas 100% preparado.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 4: Objetivos a 3 Meses & Premio -->
+            <div class="sketch-box p-5 border-yellow-500/25 text-left flex items-start space-x-4 hover:border-yellow-400">
+                <div class="h-11 w-11 rounded-2xl bg-yellow-500/10 text-yellow-500 flex items-center justify-center text-xl shrink-0 border border-yellow-500/30">
                     <i class="fa-solid fa-trophy"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white mb-1">El Premio Familia</h3>
-                    <p class="text-sm text-gray-400">Quien logre reventar sus objetivos de aquí a 3 meses se llevará un premio exclusivo. Sin excusas.</p>
+                    <h3 class="font-bold text-white mb-1">Objetivos a 3 Meses & Premio</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Fijaremos compromisos reales. Quien reviente sus métricas en el próximo trimestre se llevará un premio exclusivo de la Familia.
+                    </p>
                 </div>
             </div>
+
         </div>
 
         <!-- Formulario de Registro -->
         <div class="sketch-box p-6 sm:p-8 max-w-md w-full border-brand-red/40 relative">
-            <h2 class="text-2xl font-bold text-white mb-6 text-center">Apúntate a la llamada</h2>
+            
+            <div class="text-center mb-6">
+                <span class="inline-block px-3 py-1 rounded-md text-xs font-black tracking-wider uppercase bg-brand-red/15 text-brand-lightRed border border-brand-red/30 mb-2">
+                    Plazas limitadas
+                </span>
+                <h2 class="text-2xl font-black text-white">Apúntate a la Last Call</h2>
+                <p class="text-xs text-gray-400 mt-1">Domingo 3 de Septiembre • 17:00 a 18:00 CEST</p>
+            </div>
             
             <form id="formulario-asistencia" class="space-y-5">
                 <!-- Nombre -->
@@ -234,12 +274,11 @@
                 </div>
                 
                 <!-- Email con Aviso Importante -->
-                <div class="pt-2">
-                    <!-- Caja de aviso llamativa -->
-                    <div class="mb-3 p-3 rounded-xl bg-brand-red/10 border border-brand-red/30 flex items-start space-x-3">
-                        <i class="fa-solid fa-triangle-exclamation text-brand-lightRed mt-0.5 animate-bounce-slow"></i>
+                <div class="pt-1">
+                    <div class="mb-3 p-3.5 rounded-xl bg-brand-red/10 border border-brand-red/30 flex items-start space-x-3">
+                        <i class="fa-solid fa-triangle-exclamation text-brand-lightRed mt-0.5 animate-bounce-slow text-sm"></i>
                         <p class="text-xs text-brand-lightRed font-bold leading-relaxed">
-                            ¡Ojo! Asegúrate de poner bien el correo. Es ahí donde te enviaremos el link de acceso a la videollamada.
+                            ¡Ojo! Asegúrate de poner bien tu correo. Te enviaremos ahí el enlace privado de Google Meet / Zoom antes de las 17:00.
                         </p>
                     </div>
 
@@ -249,10 +288,16 @@
                         placeholder="tucorreo@gmail.com">
                 </div>
                 
+                <!-- Notificación de error en lugar de alert() -->
+                <div id="mensaje-error" class="hidden p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-red-200 text-xs text-center font-medium">
+                    <i class="fa-solid fa-circle-exclamation mr-1.5"></i>
+                    <span>Hubo un problema de conexión. Inténtalo de nuevo.</span>
+                </div>
+
                 <!-- Botón Submit -->
                 <button type="submit" id="btn-enviar" 
                     class="w-full mt-4 px-8 py-4 rounded-xl bg-brand-red hover:bg-brand-lightRed text-white font-black text-base shadow-lg shadow-brand-red/25 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center space-x-2">
-                    <span>Confirmar Asistencia</span>
+                    <span>Asegurar mi Sitio en la Last Call</span>
                     <i class="fa-solid fa-arrow-right text-sm"></i>
                 </button>
             </form>
@@ -262,17 +307,22 @@
                 <div class="h-16 w-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 text-3xl flex items-center justify-center animate-wiggle">
                     <i class="fa-solid fa-check"></i>
                 </div>
-                <h4 class="text-2xl font-black text-white">¡Dentro!</h4>
-                <p class="text-sm text-gray-300 leading-relaxed font-hand text-xl">
-                    Nos vemos en la llamada. Revisa tu bandeja de entrada (y el spam por si acaso) los próximos días. Te pasaré el link de la llamada unos minutos antes de las 17:00 hora Española.
+                <h4 class="text-2xl font-black text-white">¡Estás dentro de la Last Call! 🔥</h4>
+                <p class="text-sm text-gray-300 leading-relaxed font-hand text-xl px-2">
+                    Nos vemos el <strong class="text-white">domingo 3 de septiembre a las 17:00</strong>. Revisa tu bandeja de entrada (y la carpeta de spam). Te enviaremos el link de acceso unos minutos antes de empezar. Prepara tu proyecto y tus preguntas.
                 </p>
+                <div class="pt-2">
+                    <span class="inline-flex items-center text-xs text-brand-lightRed font-bold bg-brand-red/10 border border-brand-red/20 px-3 py-1.5 rounded-lg">
+                        <i class="fa-regular fa-bell mr-1.5"></i> Apúntatelo en tu calendario (17:00 - 18:00)
+                    </span>
+                </div>
             </div>
         </div>
 
     </main>
 
     <script>
-        // 1. Configuración de Firebase (Tus llaves exactas)
+        /* 1. Configuración de Firebase (Tus llaves exactas preservadas) */
         const firebaseConfig = {
             apiKey: "AIzaSyAw-LLKghBicJBC02MRwAyUS0hH-sD9ep4",
             authDomain: "myflowxx-92a77.firebaseapp.com",
@@ -287,45 +337,50 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // 2. Lógica del Formulario
-        document.getElementById('formulario-asistencia').addEventListener('submit', function(evento) {
+        /* 2. Lógica del Formulario con manejo visual de estados sin alert() */
+        const formulario = document.getElementById('formulario-asistencia');
+        const boton = document.getElementById('btn-enviar');
+        const mensajeError = document.getElementById('mensaje-error');
+
+        formulario.addEventListener('submit', function(evento) {
             evento.preventDefault();
+            mensajeError.classList.add('hidden');
             
-            const nombre = document.getElementById('nombre').value;
-            const correo = document.getElementById('correo').value; // Capturamos el correo
-            const boton = document.getElementById('btn-enviar');
+            const nombre = document.getElementById('nombre').value.trim();
+            const correo = document.getElementById('correo').value.trim();
             
             // Estado visual de carga en el botón
-            boton.innerHTML = '<span>Guardando...</span><i class="fa-solid fa-spinner animate-spin"></i>';
+            boton.innerHTML = '<span>Guardando tu sitio...</span><i class="fa-solid fa-spinner animate-spin"></i>';
             boton.disabled = true;
             boton.classList.add('opacity-75', 'cursor-not-allowed', 'hover:scale-100');
 
-            // 3. Guardar en Realtime Database
+            // 3. Guardar en Realtime Database en el nodo original
             database.ref('reunion_objetivos').push({
                 nombre: nombre,
-                correo: correo, // Se envía a la base de datos
+                correo: correo,
+                tipo_sesion: 'Last Call - Pre-evento',
+                horario_evento: 'Domingo 3 de Septiembre 17:00-18:00 CEST',
                 fecha_registro: new Date().toLocaleString()
             }).then(() => {
-                // Éxito: Ocultar formulario, mostrar check
-                document.getElementById('formulario-asistencia').classList.add('hidden');
+                // Éxito: Ocultar formulario, mostrar pantalla de confirmación
+                formulario.classList.add('hidden');
                 document.getElementById('mensaje-exito').classList.remove('hidden');
             }).catch((error) => {
-                // Error de conexión
-                alert("Uy, falló la conexión. Inténtalo de nuevo.");
-                boton.innerHTML = '<span>Confirmar Asistencia</span><i class="fa-solid fa-arrow-right text-sm"></i>';
+                // Mostrar notificación de error amigable en el DOM (sin alert())
+                mensajeError.classList.remove('hidden');
+                boton.innerHTML = '<span>Asegurar mi Sitio en la Last Call</span><i class="fa-solid fa-arrow-right text-sm"></i>';
                 boton.disabled = false;
                 boton.classList.remove('opacity-75', 'cursor-not-allowed', 'hover:scale-100');
             });
         });
 
-        // 4. Script para generar las espirales del cuaderno de la izquierda dinámicamente
         const spiralContainer = document.getElementById('spiral-container');
         const spiralTemplate = document.getElementById('spiral-template');
         
         function populateSpirals() {
             spiralContainer.innerHTML = '';
             // Calcula cuántas anillas caben según el alto de la pantalla
-            const ringCount = Math.floor(window.innerHeight / 50);
+            const ringCount = Math.floor(window.innerHeight / 48);
             for (let i = 0; i < ringCount; i++) {
                 const clone = spiralTemplate.content.cloneNode(true);
                 spiralContainer.appendChild(clone);
